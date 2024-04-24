@@ -1,0 +1,82 @@
+<div class="content">
+    <h2><%= title %></h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input
+                type="text"
+                id="title"
+                name="title"
+                class="form-control"
+                value="<%= book ? book.title : '' %>"
+                placeholder="Name of book"
+                required>
+        </div>
+        <div class="form-group">
+            <label for="author">Author:</label>
+            <select
+                id="author"
+                name="author"
+                class="form-control"
+                required>
+                <option value="" disabled>--Please select an author--</option>
+                <% authors.forEach(function(author) { %>
+                    <option
+                        value="<%= author._id %>"
+                        <%= book && book.author._id.toString() === author._id.toString() ? 'selected' : '' %>>
+                        <%= author.name %>
+                    </option>
+                <% }) %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="summary">Summary:</label>
+            <textarea
+                id="summary"
+                name="summary"
+                class="form-control"
+                placeholder="Summary"
+                required><%= book ? book.summary : '' %></textarea>
+        </div>
+        <div class="form-group">
+            <label for="isbn">ISBN:</label>
+            <input
+                type="text"
+                id="isbn"
+                name="isbn"
+                class="form-control"
+                value="<%= book ? book.isbn : '' %>"
+                placeholder="ISBN"
+                required>
+        </div>
+        <div class="form-group">
+            <label for="genre">Genre:</label>
+            <div class="genres-check">
+                <% genres.forEach(function(genre) { %>
+                    <div class="form-check">
+                        <input
+                            type="checkbox"
+                            id="<%= genre._id %>"
+                            name="genre"
+                            value="<%= genre._id %>"
+                            class="form-check-input"
+                            <%= book && book.genre.map(genre => genre._id.toString()).includes(genre._id.toString()) ? 'checked' : '' %>>
+                        <label class="form-check" for="<%= genre._id %>">
+                            <%= genre.name %>
+                        </label>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <% if (errors) { %>
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                <% errors.forEach(function(error) { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        </div>
+    <% } %>
+</div>

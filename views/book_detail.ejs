@@ -1,0 +1,43 @@
+<div class="content">
+    <h2><%= book.title %></h2>
+    <p><strong>Author:</strong> <a href="<%= book.author.url %>"><%= book.author.name %></a></p>
+    <p><strong>Summary:</strong> <%= book.summary %></p>
+    <p><strong>ISBN:</strong> <%= book.isbn %></p>
+    <p>
+        <strong>Genre:</strong> 
+        <% if (book.genre.length > 0) { %>
+            <% book.genre.forEach(function(genre) { %>
+                <a href="<%= genre.url %>"><%= genre.name %></a>
+                <% if (book.genre.indexOf(genre) < book.genre.length - 1) { %>, <% } %>
+            <% }); %>
+        <% } else { %>
+            N/A
+        <% } %>
+    </p>
+    <div class="book-copies">
+        <h3>Copies</h3>
+        <% if (book_instances.length > 0) { %>
+            <% book_instances.forEach(function(book_instance) { %>
+                <hr>
+                <% if (book_instance.status == 'Available') { %>
+                    <p class="text-success"><%= book_instance.status %></p>
+                <% } else if (book_instance.status == 'Maintenance') { %>
+                    <p class="text-danger"><%= book_instance.status %></p>
+                <% } else { %>
+                    <p class="text-warning"><%= book_instance.status %></p>
+                <% } %>
+                <p><strong>Imprint:</strong> <%= book_instance.imprint %></p>
+                <% if (book_instance.status.name !== 'Available') { %>
+                    <p><strong>Due back:</strong> <%= book_instance.due_back_formatted %></p>
+                <% } %>
+                <p><strong>Id:</strong> <a href="<%= book_instance.url %>"><%= book_instance._id %></a></p>
+            <% }); %>
+        <% } else { %>
+            <p>There are no copies of this book in the library.</p>
+        <% } %>
+    </div>
+    <hr>
+    <p><a href="<%= book.url %>/delete">Delete book</a></p>
+    <hr>
+    <p><a href="<%= book.url %>/update">Update book</a></p>
+</div>

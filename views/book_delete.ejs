@@ -1,0 +1,26 @@
+<div class="content">
+    <h2><%= title %>: <%= book.title %></h2>
+    <p><%= book.isbn %></p>
+
+    <% if (book_instances.length > 0) { %>
+        <p><strong>Delete the following book instances before attempting to delete this book.</strong></p>
+        <div class="book-instances">
+            <h3>Book Instances</h3>
+            <ul>
+                <% book_instances.forEach(function(bookInstance) { %>
+                    <li>
+                        <a href="<%= bookInstance.url %>"><%= bookInstance.imprint %></a>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+    <% } else { %>
+        <p><strong>Do you really want to delete this book?</strong></p>
+        <form method="post">
+            <div class="form-group">
+                <input id="bookid" class="form-control" type="hidden" name="bookid" value="<%= book._id %>">
+            </div>
+            <button type="submit" class="btn btn-primary">Delete</button>
+        </form>
+    <% } %>
+</div>

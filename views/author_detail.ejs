@@ -1,0 +1,22 @@
+<div class="content">
+    <h2>Author: <%= author.name %></h2>
+    <% if (author.date_of_birth) { %>
+        <p><%= author.date_of_birth_formatted %> - </p>
+    <% } %>
+    <% if (author.date_of_death) { %>
+        <p><%= author.date_of_death_formatted %></p>
+    <% } %>
+    <div class="books">
+        <h3>Books</h3>
+        <% author_books.forEach(function(book) { %>
+            <div class="book">
+                <a href="<%= book.url %>"><%= book.title %></a>
+                <p><%= book.summary %></p>
+            </div>
+        <% }); %>
+    </div>
+    <hr>
+    <p><a href="<%= author.url %>/delete">Delete author</a></p>
+    <hr>
+    <p><a href="<%= author.url %>/update">Update author</a></p>
+</div>

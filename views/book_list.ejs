@@ -1,0 +1,12 @@
+<div class="content">
+    <h2><%= title %></h2>
+        <% if (book_list.length > 0) { %>
+            <% book_list.forEach(function(book) { %>
+                <ul>
+                    <li><a href="<%= book.url %>"><%= book.title %></a> (<%= book.author.name %>)</li>
+                </ul>
+            <% }); %>
+        <% } else { %>
+            <p>There are no books.</p>
+        <% } %>
+</div>

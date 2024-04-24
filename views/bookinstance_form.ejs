@@ -1,0 +1,83 @@
+<div class="content">
+    <h2><%= title %></h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="book">Book:</label>
+            <select
+                id="book"
+                name="book"
+                class="form-control"
+                required>
+                <option value="" disabled>--Please select a book--</option>
+                <% book_list.forEach(function(book) { %>
+                    <option
+                        value="<%= book._id %>"
+                        <%= bookinstance && bookinstance.book._id.toString() === book._id.toString() ? 'selected' : '' %>>
+                        <%= book.title %>
+                    </option>
+                <% }) %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="imprint">Imprint:</label>
+            <input
+                type="text"
+                id="imprint"
+                name="imprint"
+                class="form-control"
+                value="<%= bookinstance ? bookinstance.imprint : '' %>"
+                placeholder="Publisher and publication date"
+                required>
+        </div>
+        <div class="form-group">
+            <label for="due_back">Date when book available:</label>
+            <input
+                type="date"
+                id="due_back"
+                name="due_back"
+                class="form-control"
+                value="<%= bookinstance ? bookinstance.due_back_yyyy_mm_dd : '' %>"
+                required>
+        </div>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <select
+                id="status"
+                name="status"
+                class="form-control"
+                required>
+                <option value="" disabled>--Please select a status--</option>
+                <option
+                    value="Available"
+                    <%= bookinstance && bookinstance.status === 'Available' ? 'selected' : '' %>>
+                    Available
+                </option>
+                <option
+                    value="Maintenance"
+                    <%= bookinstance && bookinstance.status === 'Maintenance' ? 'selected' : '' %>>
+                    Maintenance
+                </option>
+                <option
+                    value="Loaned"
+                    <%= bookinstance && bookinstance.status === 'Loaned' ? 'selected' : '' %>>
+                    Loaned
+                </option>
+                <option
+                    value="Reserved"
+                    <%= bookinstance && bookinstance.status === 'Reserved' ? 'selected' : '' %>>
+                    Reserved
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <% if (errors) { %>
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                <% errors.forEach(function(error) { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        </div>
+    <% } %>
+</div>

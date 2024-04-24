@@ -1,0 +1,26 @@
+<div class="content">
+    <h2><%= title %></h2>
+    <form method="post"> <!-- This form will be submitted to the same URL that displayed it because action is empty -->
+        <div class="form-group">
+            <label for="name">Genre:</label>
+            <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                class="form-control" 
+                value="<%= genre ? genre.name : '' %>" 
+                placeholder="Fantasy, Poetry, etc." 
+                required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <% if (errors) { %>
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                <% errors.forEach(function(error) { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        </div>
+    <% } %>
+</div>

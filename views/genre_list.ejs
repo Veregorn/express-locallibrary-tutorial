@@ -1,0 +1,17 @@
+<div class="content">
+    <h2><%= title %></h2>
+    <% if (genre_list.length > 0) { %>
+        <ul class="genres">
+            <h3>Books</h3>
+            <% genre_list.forEach(function(genre) { %>
+                <li>
+                    <div class="book-in-genre">
+                        <a href="<%= genre.url %>"><%= genre.name %></a>
+                    </div>
+                </li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p>There are no genres.</p>
+    <% } %>
+</div>
