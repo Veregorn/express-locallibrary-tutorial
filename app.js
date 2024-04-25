@@ -21,7 +21,7 @@ mongoose.set('strictQuery', false);
 // Load environment variables from .env file
 require('dotenv').config();
 
-// Set up mongoose connection
+// Set up mongoose connection with environment variables
 const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
 const dbHost = process.env.DB_HOST;
